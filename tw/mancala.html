@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<!-- A declaração DOCTYPE declara a versão do HTML usado no documento -->
+<html>
+  <head>
+    <link rel="stylesheet" href="decor.css">
+    <script src="func.js"></script>
+    <meta charset=UTF-8>        <!-- para caracteres acentuados   -->
+    <title>Mancala</title>  <!-- texto na decoração da janela -->
+  </head>
+
+<body>
+<div class = "main">
+
+  <h1 id = "titulo">Mancala</h1>
+  <div class="login" id ="login">
+        <label><b>Nome</b></label>
+        <input type="text" placeholder="Inserir Nome de Utilizador" name="uname" id = "nome" required>
+        <label><b>Palavra-passe</b></label>
+        <input type="password" placeholder="Inserir palavra-passe" name="psw" id = "psw" required>
+        <button onclick="login()">Entrar</button>
+    </div>
+
+    <div class = "account" id = "account">
+      <label><b id= "user"></b></label>
+      <button onclick="logout()">Sair</button>
+    </div>
+
+
+<div class = 'game'>
+<div class = "conjunto">
+  <h3>Game</h3>
+<ol>
+
+<div class="tabuleiro">
+<div class="blocos armazem">
+    <div class="pot">
+      <div class = "seeds" id="a1">
+          0
+      </div>
+    </div>
+</div>
+<div class="blocos cavidades">
+  <div class="midrow topmid">
+    <div class="pot" id="pt1">
+      <button class = "seeds" onclick="turn(this.id)" id="p10">
+          0
+      </button>
+    </div>
+    <div class="pot" id="pt2">
+      <button class = "seeds" onclick="turn(this.id)" id="p9">
+          0
+      </button>
+    </div>
+    <div class="pot" id="pt3">
+      <button class = "seeds" onclick="turn(this.id)" id="p8">
+          0
+      </button>
+    </div>
+    <div class="pot" id="pt4">
+      <button class = "seeds" onclick="turn(this.id)" id="p7">
+          0
+      </button>
+    </div>
+    <div class="pot" id="pt5">
+      <button class = "seeds" onclick="turn(this.id)" id="p6">
+          0
+      </button>
+    </div>
+  </div>
+  <div class="midrow botmid">
+    <div class="pot" id="pt10">
+      <button class = "seeds" onclick="turn(this.id)" id="p1">
+          0
+      </button>
+    </div>
+    <div class="pot" id="pt9">
+      <button class = "seeds" onclick="turn(this.id)" id="p2">
+          0
+      </button>
+    </div>
+    <div class="pot" id="pt8">
+      <button class = "seeds" onclick="turn(this.id)" id="p3">
+          0
+      </button>
+    </div>
+    <div class="pot" id="pt7">
+      <button class = "seeds" onclick="turn(this.id)" id="p4">
+          0
+      </button>
+    </div>
+    <div class="pot" id="pt6">
+      <button class = "seeds" onclick="turn(this.id)" id="p5">
+          0
+      </button>
+    </div>
+  </div>
+</div>
+<div class="blocos armazem">
+  <div class="pot">
+    <div class = "seeds" id="a2">
+        0
+    </div>
+  </div>
+</div>
+</div>
+
+</ol>
+</div>
+
+
+<div class = "conjunto" id = "configuration">
+  <h3>Configuration</h3>
+<div class = "fig">
+<ol>
+
+<li>Board size
+  <select id = "board">
+    <option name = "size" value ="3">3</option>
+    <option name = "size" value ="4">4</option>
+    <option name = "size" value ="5">5</option>
+  </select></li>
+
+<li>Seeds
+  <select id ="semente">
+    <option value ="2">2</option>
+    <option value ="3">3</option>
+    <option value ="4">4</option>
+    <option value ="5">5</option>
+  </select></li>
+
+  <li>Enemy</li>
+<input type="radio" name="enemy" value="cpu" checked="checked" id= "cpu">CPU
+<input type="radio" name="enemy" value="online">Online
+  <li>Difficulty (Only CPU)</li>
+<input type="radio" name="diff" value="easy" checked="checked" id = easy>Easy
+<input type="radio" name="diff" value="normal" checked="checked">Normal
+<input type="radio" name="diff" value="hard" id = hard>Hard
+  <li>First Turn</li>
+<input type="radio" name="turn" value="player" checked="checked" id ="player">Player
+<input type="radio" name="turn" value="bot">CPU
+<li></li>
+<button onclick="create()">submit</button>
+<button onclick="quit()">leave</button>
+<button onclick="ranks()">ranks</button>
+</ol>
+</div>
+</div>
+
+</div>
+
+<div class = "conjunto">
+<h3>Rules</h3>
+<div class ="second">
+<ol>
+  <ul>
+      <li>O tabuleiro é dividido entre dois conjuntos de N cavidades centrais e dois armazens nas laterais
+        sendo que cada jogador controla as cavidades do seu lado juntamente com o armazem a sua direita</li>
+      <li>Inicialmente os armazens estarao vazios enquanto todas as outras cavidades estaram preenchidas
+        todas com o mesmo numero de sementes</li>
+      <li>A vez cada jogador deve selecionar uma cavidade da qual serao retiradas as sementes e seguidamente
+        semeadas no sentido horario uma a uma por cada cavidade (incluindo os do adversário) e o seu armazem</li>
+      <li>Caso a ultima semente seja colocada no armazem o jogador podera repetir o turno</li>
+      <li>Caso a ultima semente seja colocada numa cavidade normal que se encontre vazia essa semente
+        juntamente com todas aquelas que se encontrarem na cavidade oposta serao movidas para o seu armazem</li>
+      <li>O jogo termina assim que um jogador nao seja capaz de jogar (nenhuma das sua cavidades contem sementes)
+        nesse caso o adversario ira recolher todas as sementes que tenha nas suas cavidades para o seu armazem
+      </li>
+      <li>Ganha o jogador que obtiver mais sementes no final </li>
+
+  </ul>
+</ol>
+</div>
+</div>
+
+<div class = "conjunto" id = "tabela">
+<h3>Ranks</h3>
+<div class ="second">
+<ol>
+      <li>
+        <div class = "score" id = "1">
+          <div>
+      </li>
+      <li>
+        <div class = "score" id = "2">
+          <div>
+      </li>
+      <li>
+        <div class = "score" id = "3">
+          <div>
+      </li>
+      <li>
+        <div class = "score" id = "4">
+          <div>
+      </li>
+      <li>
+        <div class = "score" id = "5">
+          <div>
+      </li>
+      <li>
+        <div class = "score" id = "6">
+          <div>
+      </li>
+      <li>
+        <div class = "score" id = "7">
+          <div>
+      </li>
+      <li>
+        <div class = "score" id = "8">
+          <div>
+      </li>
+      <li>
+        <div class = "score" id = "9">
+          <div>
+      </li>
+      <li>
+        <div class = "score" id = "10">
+          <div>
+      </li>
+
+      <button onclick="fechar()">close</button>
+
+</ol>
+</div>
+</div>
+
+
+
+</div>
+</body>
+</html>
